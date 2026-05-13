@@ -1,0 +1,39 @@
+# Core ML
+torch
+torchvision
+torchaudio
+onnx
+onnxruntime
+efficientnet_pytorch
+
+# Vision
+opencv-python
+mediapipe
+Pillow
+
+# Training
+albumentations
+scikit-learn
+matplotlib
+tqdm
+
+# Audio and Speech
+speechbrain
+openai-whisper
+pyaudio
+sounddevice
+soundfile
+librosa
+
+# LLM
+ollama
+
+# TTS
+TTS
+
+# Export
+onnx-simplifier
+insightface
+
+# Optional
+wandb

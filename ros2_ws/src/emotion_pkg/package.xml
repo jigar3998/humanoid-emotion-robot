@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>emotion_pkg</name>
+  <version>0.1.0</version>
+  <description>Socially intelligent humanoid emotion and support system</description>
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>MIT</license>
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>cv_bridge</depend>
+</package>
