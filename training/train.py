@@ -33,7 +33,7 @@ class_weights = class_weights.to(device)
 criterion = nn.CrossEntropyLoss(weight=class_weights, label_smoothing=0.1)
 optimizer = optim.AdamW(model.parameters(), lr=LR, weight_decay=1e-4)
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='max', factor=0.5, patience=5, verbose=True
+    optimizer, mode='max', factor=0.5, patience=5
 )
 
 best_acc = 0

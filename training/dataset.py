@@ -71,8 +71,9 @@ def get_transforms(split='train'):
                                        contrast_limit=0.3, p=0.5),
             A.GaussNoise(p=0.2),
             A.Rotate(limit=15, p=0.3),
-            A.CoarseDropout(max_holes=4, max_height=35,
-                            max_width=35, p=0.25),
+            A.CoarseDropout(num_holes_range=(1, 4),
+                            hole_height_range=(20, 35),
+                            hole_width_range=(20, 35), p=0.25),
             A.Normalize(mean=[0.485, 0.456, 0.406],
                         std=[0.229, 0.224, 0.225]),
             ToTensorV2()
@@ -90,8 +91,8 @@ def get_dataloaders(data_dir, batch_size=32):
     train_ds = EmotionDataset(data_dir, 'train', get_transforms('train'))
     val_ds   = EmotionDataset(data_dir, 'test',  get_transforms('val'))
     train_loader = DataLoader(train_ds, batch_size=batch_size,
-                              shuffle=True, num_workers=4, pin_memory=True)
+                              shuffle=True, num_workers=0, pin_memory=False)
     val_loader   = DataLoader(val_ds, batch_size=batch_size,
-                              shuffle=False, num_workers=4, pin_memory=True)
+                              shuffle=False, num_workers=0, pin_memory=False)
     weights = compute_class_weights(train_ds)
     return train_loader, val_loader, weights
