@@ -19,15 +19,16 @@ def generate_launch_description():
             }]
         ),
 
-        # Face emotion
+        # Face emotion — HSEmotions enet_b2_8 + InsightFace detection
+        # On Nano: set use_trt=True and provide trt engine paths
         Node(
             package='emotion_pkg',
             executable='face_emotion_node',
             parameters=[{
-                'use_trt':        True,
-                'emotion_model':  f'{MODEL_DIR}/emotion_b2.trt',
-                'face_model':     f'{MODEL_DIR}/retinaface.trt',
-                'conf_threshold': 0.7,
+                'use_trt':           True,
+                'trt_face_model':    f'{MODEL_DIR}/retinaface.trt',
+                'trt_emotion_model': f'{MODEL_DIR}/enet_b2_8.trt',
+                'conf_threshold':    0.5,
             }]
         ),
 

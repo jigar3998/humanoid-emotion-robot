@@ -1,7 +1,32 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(gh repo:*)",
+      "Bash(python3.10 --version)",
+      "Bash(brew list:*)",
+      "Read(//usr/local/bin/**)",
+      "Read(//opt/homebrew/bin/**)",
+      "Bash(brew install:*)",
+      "Bash(/opt/homebrew/bin/python3.10:*)",
+      "Bash(ollama --version)",
+      "Bash(brew services:*)",
+      "Bash(ollama pull:*)",
+      "Bash(ollama list:*)",
+      "Bash(ollama run:*)",
+      "Bash(xxd /private/tmp/claude-501/-Users-jigarmehta-Desktop-Desktop---Jigar-MacBook-Air-Development-Humanoid/844db23d-6e13-488a-8016-12797e2042b5/tasks/baffa5dlp.output)",
+      "Bash(kill 5338)",
+      "Bash(kill 4976 4662 4464 7178)",
+      "Bash(pkill -f train.py)",
+      "Bash(pkill -9 -f \"train.py\")",
+      "Bash(pkill -9 -f \"EfficientNet\")",
+      "Bash(mkdir -p ~/.hsemotion)",
+      "Bash(curl -L \"https://github.com/HSE-asavchenko/face-emotion-recognition/blob/main/models/affectnet_emotions/onnx/enet_b2_8_best.onnx?raw=true\" -o ~/.hsemotion/enet_b2_8_best.onnx)",
+      "Read(//Users/jigarmehta/.hsemotion/**)",
+      "Bash(curl -L \"https://github.com/HSE-asavchenko/face-emotion-recognition/raw/main/models/affectnet_emotions/onnx/enet_b2_8_best.onnx\" -o ~/.hsemotion/enet_b2_8_best.onnx)",
+      "Bash(curl -L \"https://media.githubusercontent.com/media/HSE-asavchenko/face-emotion-recognition/main/models/affectnet_emotions/onnx/enet_b2_8_best.onnx\" -o ~/.hsemotion/enet_b2_8_best.onnx)",
+      "Bash(curl -L \"https://media.githubusercontent.com/media/HSE-asavchenko/face-emotion-recognition/main/models/affectnet_emotions/onnx/enet_b0_8_best_vgaf.onnx\" -o ~/.hsemotion/enet_b0_8_best_vgaf.onnx)",
+      "Bash(rm:*)"
     ]
   }
 }

@@ -13,23 +13,23 @@ from .emotion_classifier import EmotionClassifier
 class FaceEmotionNode(Node):
     """
     Subscribes to Orbbec RGB stream.
-    Detects faces, classifies emotion.
-    Publishes to /humanoid/face_emotion as JSON.
+    Detects faces (InsightFace buffalo_l), classifies emotion (HSEmotions enet_b2_8).
+    Publishes to /humanoid/face_emotion as JSON: {"emotion": "sad", "confidence": 0.82}
     """
     def __init__(self):
         super().__init__('face_emotion_node')
         self.declare_parameter('use_trt',        False)
-        self.declare_parameter('emotion_model',  '../models/emotion_b2.onnx')
-        self.declare_parameter('face_model',     '../models/retinaface_sim.onnx')
-        self.declare_parameter('conf_threshold', 0.7)
+        self.declare_parameter('trt_face_model',    '')
+        self.declare_parameter('trt_emotion_model', '')
+        self.declare_parameter('conf_threshold', 0.5)
 
-        use_trt  = self.get_parameter('use_trt').value
-        em_model = self.get_parameter('emotion_model').value
-        fd_model = self.get_parameter('face_model').value
-        conf     = self.get_parameter('conf_threshold').value
+        use_trt    = self.get_parameter('use_trt').value
+        face_trt   = self.get_parameter('trt_face_model').value or None
+        emot_trt   = self.get_parameter('trt_emotion_model').value or None
+        conf       = self.get_parameter('conf_threshold').value
 
-        self.face_detector = FaceDetector(fd_model, use_trt=use_trt)
-        self.classifier    = EmotionClassifier(em_model, use_trt=use_trt)
+        self.face_detector = FaceDetector(model_path=face_trt, use_trt=use_trt)
+        self.classifier    = EmotionClassifier(model_path=emot_trt, use_trt=use_trt)
         self.conf          = conf
         self.bridge        = CvBridge()
 
@@ -37,7 +37,7 @@ class FaceEmotionNode(Node):
             Image, '/camera/color/image_raw', self.on_frame, 10
         )
         self.pub = self.create_publisher(String, '/humanoid/face_emotion', 10)
-        self.get_logger().info('Face emotion node ready')
+        self.get_logger().info('Face emotion node ready (HSEmotions enet_b2_8)')
 
     def on_frame(self, msg):
         try:
@@ -50,12 +50,13 @@ class FaceEmotionNode(Node):
         if not boxes:
             return
 
+        # Largest face
         box  = max(boxes, key=lambda b: (b[2]-b[0]) * (b[3]-b[1]))
         face = self.face_detector.align_face(frame, box)
         emotion, confidence = self.classifier.predict(face)
 
         self.pub.publish(String(data=json.dumps({
-            'emotion': emotion, 'confidence': confidence
+            'emotion': emotion, 'confidence': round(confidence, 3)
         })))
 
 

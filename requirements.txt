@@ -1,21 +1,11 @@
-# Core ML
-torch
-torchvision
-torchaudio
+# Face detection
+insightface
+opencv-python
+
+# Face emotion — pretrained AffectNet model, no training needed
+hsemotion-onnx
 onnx
 onnxruntime
-efficientnet_pytorch
-
-# Vision
-opencv-python
-mediapipe
-Pillow
-
-# Training
-albumentations
-scikit-learn
-matplotlib
-tqdm
 
 # Audio and Speech
 speechbrain
@@ -31,9 +21,7 @@ ollama
 # TTS
 TTS
 
-# Export
-onnx-simplifier
-insightface
-
-# Optional
-wandb
+# Utilities
+numpy
+Pillow
+tqdm
